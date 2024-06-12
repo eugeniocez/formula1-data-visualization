@@ -3,14 +3,12 @@ import pandas as pd
 import folium
 import plotly.express as px
 
-app = Flask(__name__,static_folder="static")
+app = Flask(__name__, static_folder="static")
 
-pablo
+# Read the CSV data
 data = pd.read_csv('static/Sources/merged_results.csv')
 
-data = pd.read_csv('static/Sources/merged_data.csv')
- main
-
+# Nationality to coordinates mapping
 nationality_coordinates = {
     'United Kingdom': (54.5260, -3.7038),
     'France': (46.2276, 2.2137),
@@ -37,6 +35,7 @@ nationality_coordinates = {
     'Monaco': (43.7384, 7.4246)
 }
 
+# Country code to full name mapping
 country_conversion = {
     'ARG': 'Argentina',
     'AUS': 'Australia',
@@ -100,19 +99,11 @@ def drivers_view():
 
 @app.route('/teams')
 def teams_view():
-pablo
-    # Group by 'Team' and sum the 'otal_Victories_Team' to ensure unique values
-    team_victories_df = data.groupby('Team', as_index=False)['Total_Victories_Team'].mean()
-    
-    # Create the bar chart with the grouped data
-    fig = px.bar(team_victories_df, x='Team', y='Total_Victories_Team', title='Total Wins by Team')
-
-    # Group by 'Team' and sum the 'Total Races won by team' to ensure unique values
-    team_victories_df = data.groupby('Team', as_index=False)['Total_Victories_Team'].mean()
+    # Group by 'Team' and mean the 'Total Races won by team' to ensure unique values
+    team_victories_df = data.groupby('Team', as_index=False)['Total Races won by team'].mean()
     
     # Create the bar chart with the grouped data
     fig = px.bar(team_victories_df, x='Team', y='Total Races won by team', title='Total Wins by Team')
- main
     
     # Convert the figure to HTML
     graph_html = fig.to_html(full_html=False)
