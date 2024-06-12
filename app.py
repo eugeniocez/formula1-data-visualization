@@ -5,7 +5,7 @@ import plotly.express as px
 
 app = Flask(__name__)
 
-data = pd.read_csv('Sources/merged_data.csv')
+data = pd.read_csv('static/Sources/merged_data.csv')
 
 nationality_coordinates = {
     'United Kingdom': (54.5260, -3.7038),
