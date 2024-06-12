@@ -7,7 +7,7 @@ import plotly.express as px
 app = Flask(__name__)
 
 # Load data from CSV file.
-data = pd.read_csv('Sources/merged_results.csv')
+data = pd.read_csv('static/Sources/merged_results.csv')
 
 # Conversion from country codes to full names for clarity in the map and other visualizations.
 country_conversion = {
