@@ -4,10 +4,13 @@ import folium
 from folium.plugins import MarkerCluster
 import plotly.express as px
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="static")
+
+data = pd.read_csv('static/Sources/merged_results.csv')
 
 # Load data from CSV file.
 data = pd.read_csv('Sources/merged_results.csv')
+data = pd.read_csv('static/Sources/merged_data.csv')
 
 # Conversion from country codes to full names for clarity in the map and other visualizations.
 country_conversion = {
@@ -105,6 +108,8 @@ def drivers_view():
 
 @app.route('/teams')
 def teams_view():
+pablo
+    # Group by 'Team' and sum the 'otal_Victories_Team' to ensure unique values
     team_victories_df = data.groupby('Team', as_index=False)['Total_Victories_Team'].mean()
     fig = px.bar (team_victories_df, x='Team', y='Total_Victories_Team',
                  title='Total Wins by Team', 
@@ -116,6 +121,18 @@ def teams_view():
     fig.update_layout(title_font_size=22, title_x=0.5, 
                       xaxis_title='', yaxis_title='Total Wins',
                       plot_bgcolor='rgba(0,0,0,0)', paper_bgcolor='rgba(0,0,0,0)')
+    
+    # Create the bar chart with the grouped data
+    fig = px.bar(team_victories_df, x='Team', y='Total_Victories_Team', title='Total Wins by Team')
+
+    # Group by 'Team' and sum the 'Total Races won by team' to ensure unique values
+    team_victories_df = data.groupby('Team', as_index=False)['Total_Victories_Team'].mean()
+    
+    # Create the bar chart with the grouped data
+    fig = px.bar(team_victories_df, x='Team', y='Total Races won by team', title='Total Wins by Team')
+ main
+    
+    # Convert the figure to HTML
     graph_html = fig.to_html(full_html=False)
     return render_template('teams.html', graph_html=graph_html)
 
