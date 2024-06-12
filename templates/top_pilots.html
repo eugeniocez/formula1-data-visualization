@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Top N Pilots by Total Victories - F1 Wins Visualizer{% endblock %}
+
+{% block instructions %}
+<h2 class="text-center mt-4">Top N Pilots by Total Victories</h2>
+<p class="text-center">Use the form below to select the number of top pilots you want to see.</p>
+{% endblock %}
+
+{% block content %}
+<div class="row mt-4">
+    <div class="col-md-6 text-center">
+        <img src="{{ url_for('static', filename='top_pilots_reference.jpg') }}" alt="Top Pilots Reference Image" class="img-fluid rounded mx-auto d-block">
+    </div>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" class="form-inline justify-content-center mt-4">
+                    <label for="topN" class="mr-2">Select Top N Pilots:</label>
+                    <input type="number" id="topN" name="topN" value="{{ topN }}" min="1" max="50" class="form-control mr-2">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </form>
+                <div id="graph" class="mt-4">{{ graph_html|safe }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

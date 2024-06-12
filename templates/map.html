@@ -1,32 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Wins Map</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #map {
-            width: 100%;
-            height: 600px;
-            margin: 20px 0;
-        }
-        .instructions {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Global Map of Drivers and their respective Wins!</h1>
-    <div class="instructions">
-        <p> - Feel free to use the map below to globally explore different countries!</p>
-        <p> - Inside each country, and by clicking on a pin, you'll be able to se a list of current and past drivers that belong to that specific country, along with the number of wins they have achieved.</p>
-    </div>
-    <div id="map">{{ map_html|safe }}</div>
-</body>
-</html>
+{% extends "base.html" %}
 
+{% block title %}Global Map of Drivers - F1 Wins Visualizer{% endblock %}
+
+{% block instructions %}
+<h2 class="text-center mt-4">Global Map of Drivers</h2>
+<p class="text-center">Use the map below to explore the wins of Formula 1 drivers from different countries. Click on a pin to see detailed information about the drivers from that country and their total number of wins.</p>
+{% endblock %}
+
+{% block content %}
+<div class="row mt-4 justify-content-center">
+    <div class="col-md-6 text-center">
+        
+    </div>
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-body">
+                <div id="map">{{ map_html|safe }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
