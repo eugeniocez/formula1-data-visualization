@@ -1,36 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Wins Visualizer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        .instructions {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-        .logo {
-            width: 200px;
-            height: auto;
-            margin-top: 20px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Welcome to the Formula 1 Wins Visualizer</h1>
-    <img src="{{ url_for('static', filename='f1_logo.png') }}" alt="F1 Logo" class="logo">
-    <div class="instructions">
-        <p>Use the links below to explore different visualizations of Formula 1 wins data.</p>
-        <p><a href="/map">Global Map of Drivers</a></p>
-        <p><a href="/drivers">Total Wins by Driver</a></p>
-        <p><a href="/teams">Total Wins by Team</a></p>
+{% extends "base.html" %}
+
+{% block title %}Home - F1 Data Visualizer{% endblock %}
+
+{% block instructions %}
+<!-- Optional instructions section -->
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron jumbotron-fluid text-center bg-dark text-white">
+    <div class="container">
+        <h1 class="display-4">Welcome to the Formula 1 Data Visualizer</h1>
+        <p class="lead">Our application provides an engaging and insightful way to explore the vast and exciting world of Formula 1 racing. Designed with both casual fans and dedicated enthusiasts in mind, this tool harnesses the power of data visualization to bring the statistics and stories of Formula 1 to life.</p>
     </div>
-</body>
-</html>
-
-
-
+</div>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Global Map</h5>
+                    <p class="card-text">View a global map of F1 drivers and their victories.</p>
+                    <a href="/map" class="btn btn-primary">View Map</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Drivers</h5>
+                    <p class="card-text">Explore the total number of wins by each Formula 1 driver.</p>
+                    <a href="/drivers" class="btn btn-secondary">View Drivers</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Teams</h5>
+                    <p class="card-text">See the total number of races won by each team in F1 history.</p>
+                    <a href="/teams" class="btn btn-success">View Teams</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Top Pilots</h5>
+                    <p class="card-text">Select and view the top pilots by total victories.</p>
+                    <a href="/top_pilots" class="btn btn-danger">View Top Pilots</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <img src="{{ url_for('static', filename='index_reference.jpg') }}" alt="Index Reference Image" class="img-fluid rounded mx-auto d-block">
+        </div>
+    </div>
+</div>
+{% endblock %}
