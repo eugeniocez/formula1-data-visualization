@@ -3,9 +3,9 @@ import pandas as pd
 import folium
 import plotly.express as px
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder="static")
 
-data = pd.read_csv('Sources/merged_data.csv')
+data = pd.read_csv('static/Sources/merged_data.csv')
 
 nationality_coordinates = {
     'United Kingdom': (54.5260, -3.7038),
@@ -96,8 +96,16 @@ def drivers_view():
 
 @app.route('/teams')
 def teams_view():
-    fig = px.bar(data, x='Team', y='Total Races won by team', title='Total Wins by Team')
+    # Group by 'Team' and sum the 'Total Races won by team' to ensure unique values
+    team_victories_df = data.groupby('Team', as_index=False)['Total Races won by team'].mean()
+    
+    # Create the bar chart with the grouped data
+    fig = px.bar(team_victories_df, x='Team', y='Total Races won by team', title='Total Wins by Team')
+    
+    # Convert the figure to HTML
     graph_html = fig.to_html(full_html=False)
+    
+    # Render the template with the graph
     return render_template('teams.html', graph_html=graph_html)
 
 if __name__ == '__main__':
