@@ -1,31 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>F1 Wins Map</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-        #map {
-            width: 100%;
-            height: 600px;
-            margin: 20px 0;
-        }
-        .instructions {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Global Map of Drivers</h1>
-    <div class="instructions">
-        <p>Use the map below to explore the wins of Formula 1 drivers from different countries. Click on a pin to see detailed information about the drivers from that country and their total number of wins.</p>
-    </div>
-    <div id="map">{{ map_html|safe }}</div>
-</body>
-</html>
+{% extends "base.html" %}
 
+{% block title %}Global Map of Drivers - F1 Wins Visualizer{% endblock %}
+
+{% block instructions %}
+<h2 class="text-center mt-4">Global Map of Drivers</h2>
+<p class="text-center">Use the map below to explore the wins of Formula 1 drivers from different countries. Click on a pin to see detailed information about the drivers from that country and their total number of wins.</p>
+{% endblock %}
+
+{% block content %}
+<div class="card mt-4">
+    <div class="card-body">
+        <div id="map">{{ map_html|safe }}</div>
+    </div>
+</div>
+{% endblock %}
