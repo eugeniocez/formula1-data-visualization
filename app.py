@@ -5,7 +5,7 @@ import plotly.express as px
 
 app = Flask(__name__)
 
-data = pd.read_csv('Sources/merged_data.csv')
+data = pd.read_csv('Sources/merged_results.csv')
 
 nationality_coordinates = {
     'United Kingdom': (54.5260, -3.7038),
@@ -69,12 +69,12 @@ def index():
 def map_view():
     f1_map = folium.Map(location=[0, 0], zoom_start=2)
     
-    grouped = data.groupby(['Nationality', 'Driver']).agg({'Total Driver Victories': 'sum'}).reset_index()
+    grouped = data.groupby(['Nationality', 'Driver']).agg({'Total_Victories_Driver': 'sum'}).reset_index()
     drivers_by_nationality = grouped.groupby('Nationality').apply(lambda x: x.to_dict(orient='records')).to_dict()
 
     def create_popup_content(drivers):
-        total_wins = sum(driver['Total Driver Victories'] for driver in drivers)
-        driver_details = "\n".join([f"{driver['Driver']}: {driver['Total Driver Victories']} wins" for driver in drivers])
+        total_wins = sum(driver['Total_Victories_Driver'] for driver in drivers)
+        driver_details = "\n".join([f"{driver['Driver']}: {driver['Total_Victories_Driver']} wins" for driver in drivers])
         return f"Total Wins for {drivers[0]['Nationality']}:\n{total_wins}\n{driver_details}"
 
     for nationality, drivers in drivers_by_nationality.items():
@@ -90,14 +90,22 @@ def map_view():
 
 @app.route('/drivers')
 def drivers_view():
-    fig = px.bar(data, x='Driver', y='Total Driver Victories', title='Total Wins by Driver')
+    fig = px.bar(data, x='Driver', y='Total_Victories_Driver', title='Total Wins by Driver')
     graph_html = fig.to_html(full_html=False)
     return render_template('drivers.html', graph_html=graph_html)
 
 @app.route('/teams')
 def teams_view():
-    fig = px.bar(data, x='Team', y='Total Races won by team', title='Total Wins by Team')
+    # Group by 'Team' and sum the 'otal_Victories_Team' to ensure unique values
+    team_victories_df = data.groupby('Team', as_index=False)['Total_Victories_Team'].mean()
+    
+    # Create the bar chart with the grouped data
+    fig = px.bar(team_victories_df, x='Team', y='Total_Victories_Team', title='Total Wins by Team')
+    
+    # Convert the figure to HTML
     graph_html = fig.to_html(full_html=False)
+    
+    # Render the template with the graph
     return render_template('teams.html', graph_html=graph_html)
 
 if __name__ == '__main__':
