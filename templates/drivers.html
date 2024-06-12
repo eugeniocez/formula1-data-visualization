@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Total Wins by Driver</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .instructions {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        #graph {
+            width: 100%;
+            height: 600px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Total Wins by Driver</h1>
+    <div class="instructions">
+        <p>Explore the total number of wins by each Formula 1 driver.</p>
+    </div>
+    <div id="graph">{{ graph_html|safe }}</div>
+</body>
+</html>

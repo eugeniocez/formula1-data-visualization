@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F1 Wins Visualizer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .instructions {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+        .logo {
+            width: 200px;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Formula 1 Wins Visualizer</h1>
+    <img src="{{ url_for('static', filename='f1_logo.png') }}" alt="F1 Logo" class="logo">
+    <div class="instructions">
+        <p>Use the links below to explore different visualizations of Formula 1 wins data.</p>
+        <p><a href="/map">Global Map of Drivers</a></p>
+        <p><a href="/drivers">Total Wins by Driver</a></p>
+        <p><a href="/teams">Total Wins by Team</a></p>
+    </div>
+</body>
+</html>
+
+
+
