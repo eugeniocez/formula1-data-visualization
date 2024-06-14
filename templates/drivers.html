@@ -9,10 +9,10 @@
 
 {% block content %}
 <div class="row mt-4">
-    <div class="col-md-6 text-center">
+    <div class="col-4 text-center">
         <img src="{{ url_for('static', filename='drivers_reference.jpg') }}" alt="Drivers Reference Image" class="img-fluid rounded mx-auto d-block">
     </div>
-    <div class="col-md-6">
+    <div class="col-8">
         <div class="card">
             <div class="card-body">
                 <div id="graph">{{ graph_html|safe }}</div>
